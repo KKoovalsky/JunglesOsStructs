@@ -1,0 +1,9 @@
+[submodule "ext_deps/unity"]
+	path = ext_deps/unity
+	url = https://github.com/ThrowTheSwitch/Unity.git
+[submodule "ext_deps/FreeRTOS"]
+	path = ext_deps/FreeRTOS
+	url = https://github.com/aws/amazon-freertos.git
+[submodule "ext_deps/FreeRTOSAddons"]
+	path = ext_deps/FreeRTOSAddons
+	url = https://github.com/michaelbecker/freertos-addons.git
