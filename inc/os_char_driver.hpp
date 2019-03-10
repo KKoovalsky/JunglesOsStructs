@@ -21,9 +21,16 @@ namespace jungles {
 // DECLARATIONS AND DEFINITIONS FOR PUBLIC USE
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace detail {
-} // namespace detail
-
+/**
+ * \brief Works similarly to linux's char driver. Allows to readlines and write strings to a device.
+ *
+ * This implementation assumes that it works on top of ISR handlers. Because of that RX and TX enablers/disablers must
+ * be provided and also a function which allows to send a byte over the TX line. It is a wrapper over
+ * jungles::ibytestream_ostringstream object used to received data (see it's documentation for details).
+ * This class performs also a blocking write to make it possibly most memory effective - the strings passed to the
+ * write() function are not copied to any internal buffer - they'ra streamed from the caller side.
+ * The tx_isr_handler and rx_isr_handler must be called from ISR to make this class work as expected.
+ */
 template <size_t InternalRxBufSize, size_t MaxNumStringsInRxBuf> class os_char_driver
 {
   public:
@@ -73,9 +80,6 @@ template <size_t InternalRxBufSize, size_t MaxNumStringsInRxBuf> class os_char_d
 
     template <typename StringType> void write_single_string(StringType &&string);
 };
-
-namespace detail {
-} // namespace detail
 
 // --------------------------------------------------------------------------------------------------------------------
 // PUBLIC MEMBERS' DEFINITIONS
