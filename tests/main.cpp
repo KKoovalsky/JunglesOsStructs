@@ -13,7 +13,6 @@ int main()
 {
     UNITY_BEGIN();
 
-    TaskHandle_t test_task_handle;
     xTaskCreate(
         [](void *) {
             test_os_char_driver();
@@ -24,11 +23,9 @@ int main()
         2048,
         NULL,
         1,
-        NULL/* &test_task_handle */);
+        NULL);
 
     vTaskStartScheduler();
-
-    // vTaskDelete(test_task_handle);
 
     return UNITY_END();
 }

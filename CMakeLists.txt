@@ -17,7 +17,6 @@ set(FREERTOS_DIR ${EXT_DEPS}/FreeRTOS/lib)
 set(FREERTOS_PORT_DIR ${EXT_DEPS}/FreeRTOSAddons/Linux/portable/GCC/Linux)
 
 set(HEADERS_PATH "${CMAKE_SOURCE_DIR}/inc")
-set(SOURCES_PATH "${CMAKE_SOURCE_DIR}/src")
 
 add_definitions(-D__FREERTOS__)
 
@@ -29,8 +28,7 @@ include_directories("${HEADERS_PATH}" ${UNITY_DIR} ${JUNGLES_DATA_STRUCTS} ${FRE
 
 file(GLOB SOURCES ${TESTS}/*.c* ${FREERTOS_DIR}/FreeRTOS/*.c* ${FREERTOS_PORT_DIR}/*.c*)
 
-add_executable(${PRJ_NAME} ${SOURCES} ${UNITY_DIR}/unity.c ${EXT_DEPS}/FreeRTOS/lib/FreeRTOS/portable/MemMang/heap_3.c
-    ${SOURCES_PATH}/os_lockguard.cpp)
+add_executable(${PRJ_NAME} ${SOURCES} ${UNITY_DIR}/unity.c ${EXT_DEPS}/FreeRTOS/lib/FreeRTOS/portable/MemMang/heap_3.c)
 
 target_link_libraries(${PRJ_NAME} Threads::Threads)
 

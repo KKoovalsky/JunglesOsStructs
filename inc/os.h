@@ -53,6 +53,7 @@ typedef TickType_t os_tick_type_t;
 #define os_event_group_wait_bits_endlessly(event_group, bits_to_wait_for, clear_on_exit, wait_for_all)                 \
     xEventGroupWaitBits(event_group, bits_to_wait_for, clear_on_exit, wait_for_all, portMAX_DELAY)
 #define os_event_group_clear_bits(event_group, bits_to_clear) xEventGroupClearBits(event_group, bits_to_clear)
+#define os_event_group_get_bits(event_group) xEventGroupGetBits(event_group)
 #define os_counting_semaphore_create(max_count, initial_count) xSemaphoreCreateCounting(max_count, initial_count)
 #define os_counting_semaphore_delete(semaphore) vSemaphoreDelete(semaphore)
 #define os_mutex_create() xSemaphoreCreateMutex()
@@ -136,6 +137,7 @@ typedef unsigned os_tick_type_t;
 #define os_event_group_wait_bits_endlessly(event_group, bits_to_wait_for, clear_on_exit, wait_for_all) empty_fun(0)
 #define os_event_group_clear_bits(event_group, bits_to_clear) empty_fun(0)
 #define os_event_group_set_bits_from_isr(event_group, bits_to_set) empty_fun(0)
+#define os_event_group_get_bits(event_group) empty_fun(0)
 #define os_get_free_heap_size() empty_fun(0)
 #define os_get_minimum_ever_free_heap_size() empty_fun(0)
 #define os_mutex_create() empty_fun(0)
