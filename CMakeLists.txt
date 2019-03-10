@@ -35,5 +35,5 @@ add_executable(${PRJ_NAME} ${SOURCES} ${UNITY_DIR}/unity.c ${EXT_DEPS}/FreeRTOS/
 target_link_libraries(${PRJ_NAME} Threads::Threads)
 
 add_custom_target(run-test
-    valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./${PRJ_NAME}
+    valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --trace-children=yes ./${PRJ_NAME}
     )

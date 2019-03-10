@@ -95,6 +95,7 @@ static void UNIT_TEST_1_block_on_read_and_unblock_on_message_received()
     auto line = chardrv.readline(os_no_timeout);
 
     TEST_ASSERT_EQUAL_STRING("makapaka", line.c_str());
+    os_task_yield();
 }
 
 static void UNIT_TEST_2_blocking_write_multiple_string_types()
