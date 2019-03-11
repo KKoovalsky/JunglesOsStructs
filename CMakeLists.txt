@@ -16,7 +16,7 @@ set(JUNGLES_DATA_STRUCTS ${EXT_DEPS}/jungles_data_structs/inc)
 set(FREERTOS_DIR ${EXT_DEPS}/FreeRTOS/lib)
 set(FREERTOS_PORT_DIR ${EXT_DEPS}/FreeRTOSAddons/Linux/portable/GCC/Linux)
 
-set(HEADERS_PATH "${CMAKE_SOURCE_DIR}/inc")
+set(HEADERS_PATH "${CMAKE_SOURCE_DIR}")
 
 add_definitions(-D__FREERTOS__)
 
