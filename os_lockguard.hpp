@@ -15,25 +15,24 @@ class os_lockguard
 {
   public:
     //! The mutex must be created before this constructor is used.
-    os_lockguard(os_mutex_t m) noexcept;
+    os_lockguard(os_mutex_t m) noexcept : mux(m)
+    {
+        os_mutex_take(mux, os_no_timeout);
+    }
+
+    ~os_lockguard()
+    {
+        os_mutex_give(mux);
+    }
+
     os_lockguard(const os_lockguard &) = delete;
     os_lockguard &operator=(const os_lockguard &) = delete;
     os_lockguard(os_lockguard &&) = delete;
     os_lockguard &operator=(os_lockguard &&) = delete;
-    ~os_lockguard();
 
   private:
     os_mutex_t mux;
 };
-
-os_lockguard::os_lockguard(os_mutex_t m) noexcept : mux(m)
-{
-    os_mutex_take(mux, os_no_timeout);
-}
-os_lockguard::~os_lockguard()
-{
-    os_mutex_give(mux);
-}
 
 } // namespace jungles
 
