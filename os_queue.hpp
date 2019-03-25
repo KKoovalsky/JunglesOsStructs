@@ -14,6 +14,8 @@
 #include <stdexcept>
 #include <vector>
 
+namespace jungles {
+
 template <typename T, size_t N> class os_queue
 {
   public:
@@ -102,6 +104,8 @@ template <typename T, size_t N> neither::Either<T, bool> os_queue<T, N>::receive
         return neither::left(static_cast<T>(res));
     }
 }
+
+} // namespace jungles
 
 #endif /* OS_QUEUE_HPP */
 
