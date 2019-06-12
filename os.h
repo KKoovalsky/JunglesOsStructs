@@ -58,6 +58,8 @@ typedef TickType_t os_tick_type_t;
 #define os_event_group_get_bits(event_group) xEventGroupGetBits(event_group)
 #define os_counting_semaphore_create(max_count, initial_count) xSemaphoreCreateCounting(max_count, initial_count)
 #define os_counting_semaphore_delete(semaphore) vSemaphoreDelete(semaphore)
+#define os_counting_semaphore_give_from_isr(semaphore) os_semaphore_give_from_isr(semaphore)
+#define os_counting_semaphore_take(semaphore, timeout) xSemaphoreTake(semaphore, os_timeout_to_ticks(timeout))
 #define os_recursive_mutex_create() xSemaphoreCreateRecursiveMutex()
 #define os_recursive_mutex_delete(mutex) vSemaphoreDelete(mutex)
 #define os_recursive_mutex_take(mutex, timeout) xSemaphoreTakeRecursive(mutex, os_timeout_to_ticks(timeout))
@@ -66,8 +68,6 @@ typedef TickType_t os_tick_type_t;
 #define os_mutex_delete(mutex) vSemaphoreDelete(mutex)
 #define os_mutex_take(mutex, timeout) xSemaphoreTake(mutex, os_timeout_to_ticks(timeout))
 #define os_mutex_give(mutex) xSemaphoreGive(mutex)
-#define os_counting_semaphore_give_from_isr(semaphore) os_semaphore_give_from_isr(semaphore)
-#define os_counting_semaphore_take(semaphore, timeout) xSemaphoreTake(semaphore, os_timeout_to_ticks(timeout))
 
 #define os_timeout_to_ticks(timeout_ms) (timeout_ms == portMAX_DELAY ? portMAX_DELAY : pdMS_TO_TICKS(timeout_ms))
 
