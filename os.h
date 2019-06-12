@@ -20,6 +20,7 @@ typedef EventGroupHandle_t os_event_group_handle_t;
 typedef EventBits_t os_event_bits_t;
 typedef SemaphoreHandle_t os_counting_semaphore_t;
 typedef SemaphoreHandle_t os_binary_semaphore_t;
+typedef SemaphoreHandle_t os_recursive_mutex_t;
 typedef SemaphoreHandle_t os_mutex_t;
 typedef TickType_t os_tick_type_t;
 
@@ -56,6 +57,10 @@ typedef TickType_t os_tick_type_t;
 #define os_event_group_get_bits(event_group) xEventGroupGetBits(event_group)
 #define os_counting_semaphore_create(max_count, initial_count) xSemaphoreCreateCounting(max_count, initial_count)
 #define os_counting_semaphore_delete(semaphore) vSemaphoreDelete(semaphore)
+#define os_recursive_mutex_create() xSemaphoreCreateRecursiveMutex()
+#define os_recursive_mutex_delete(mutex) vSemaphoreDelete(mutex)
+#define os_recursive_mutex_take(mutex, timeout) xSemaphoreTakeRecursive(mutex, os_timeout_to_ticks(timeout))
+#define os_recursive_mutex_give(mutex) xSemaphoreGiveRecursive(mutex)
 #define os_mutex_create() xSemaphoreCreateMutex()
 #define os_mutex_delete(mutex) vSemaphoreDelete(mutex)
 #define os_mutex_take(mutex, timeout) xSemaphoreTake(mutex, os_timeout_to_ticks(timeout))
@@ -104,6 +109,7 @@ typedef unsigned os_event_group_handle_t;
 typedef unsigned os_event_bits_t;
 typedef unsigned os_counting_semaphore_t;
 typedef unsigned os_binary_semaphore_t;
+typedef unsigned os_recursive_mutex_t;
 typedef unsigned os_mutex_t;
 typedef unsigned os_tick_type_t;
 
@@ -140,6 +146,10 @@ typedef unsigned os_tick_type_t;
 #define os_event_group_get_bits(event_group) empty_fun(0)
 #define os_get_free_heap_size() empty_fun(0)
 #define os_get_minimum_ever_free_heap_size() empty_fun(0)
+#define os_recursive_mutex_create() empty_fun(0)
+#define os_recursive_mutex_delete(mutex) empty_fun(0)
+#define os_recursive_mutex_take(mutex, timeout) empty_fun(0)
+#define os_recursive_mutex_give(mutex) empty_fun(0)
 #define os_mutex_create() empty_fun(0)
 #define os_mutex_delete(mutex) empty_fun(0)
 #define os_mutex_take(mutex, timeout_ms) empty_fun(0)
