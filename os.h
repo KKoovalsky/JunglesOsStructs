@@ -27,6 +27,7 @@ typedef TickType_t os_tick_type_t;
 #define os_true pdTRUE
 #define os_false pdFALSE
 #define os_fail pdFAIL
+#define os_pass pdPASS
 
 #define os_no_timeout portMAX_DELAY
 
@@ -116,6 +117,7 @@ typedef unsigned os_tick_type_t;
 #define os_true 1
 #define os_false 0
 #define os_fail 0
+#define os_pass 1
 
 #define os_no_timeout 0
 
