@@ -78,6 +78,8 @@ typedef TickType_t os_tick_type_t;
 #define os_get_free_heap_size() xPortGetFreeHeapSize()
 #define os_get_minimum_ever_free_heap_size() xPortGetMinimumEverFreeHeapSize()
 
+#define os_scheduler_start() vTaskStartScheduler()
+
 static inline void os_notify_from_isr(os_task_handle_t task_handle)
 {
     BaseType_t higher_prior_task_woken = pdFALSE;
@@ -170,6 +172,7 @@ typedef unsigned os_tick_type_t;
 #define os_binary_semaphore_give(mutex) empty_fun(0)
 #define os_semaphore_give_from_isr(semaphore) empty_fun(0)
 #define os_timeout_to_ticks(timeout) empty_fun(0)
+#define os_scheduler_start() empty_fun(0)
 
 static inline unsigned empty_fun(unsigned retval)
 {
