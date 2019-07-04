@@ -48,6 +48,8 @@ typedef TickType_t os_tick_type_t;
 #define os_wait_endlessly_for_notification() ulTaskNotifyTake(pdTRUE, portMAX_DELAY)
 #define os_wait_for_notification_ms(timeout_ms) ulTaskNotifyTake(pdTRUE, pdMS_TO_TICKS(timeout_ms))
 #define os_notify(task_handle) xTaskNotifyGive(task_handle)
+#define os_notify_give_from_isr(task_handle, higher_prior_task_woken)                                                  \
+    vTaskNotifyGiveFromISR(task_handle, higher_prior_task_woken)
 #define os_clear_this_tasks_notification() ulTaskNotifyTake(pdTRUE, 0)
 
 #define os_event_group_create() xEventGroupCreate()
@@ -140,6 +142,7 @@ typedef unsigned os_tick_type_t;
 #define os_wait_endlessly_for_notification() empty_fun(0)
 #define os_wait_for_notification_ms(timeout_ms) empty_fun(0)
 #define os_notify_from_isr(task_handle) empty_fun(0)
+#define os_notify_give_from_isr(task_handle) empty_fun(0)
 #define os_notify(task_handle) empty_fun(0)
 #define os_clear_this_tasks_notification() empty_fun(0)
 #define os_delay_ms(delay_ms) empty_fun(0)
