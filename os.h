@@ -71,6 +71,10 @@ typedef TickType_t os_tick_type_t;
 #define os_binary_semaphore_delete(mutex) vSemaphoreDelete(mutex)
 #define os_binary_semaphore_take(mutex, timeout) xSemaphoreTake(mutex, os_timeout_to_ticks(timeout))
 #define os_binary_semaphore_give(mutex) xSemaphoreGive(mutex)
+#define os_binary_semaphore_take_from_isr(mutex, higher_prior_task_woken)                                              \
+    xSemaphoreTakeFromISR(mutex, higher_prior_task_woken)
+#define os_binary_semaphore_give_from_isr(mutex, higher_prior_task_woken)                                              \
+    xSemaphoreGiveFromISR(mutex, higher_prior_task_woken)
 #define os_mutex_create() xSemaphoreCreateMutex()
 #define os_mutex_delete(mutex) vSemaphoreDelete(mutex)
 #define os_mutex_take(mutex, timeout) xSemaphoreTake(mutex, os_timeout_to_ticks(timeout))
@@ -175,6 +179,8 @@ typedef unsigned os_tick_type_t;
 #define os_binary_semaphore_delete(mutex) empty_fun(0)
 #define os_binary_semaphore_take(mutex, timeout) empty_fun(0)
 #define os_binary_semaphore_give(mutex) empty_fun(0)
+#define os_binary_semaphore_take_from_isr(mutex, higher_prior_task_woken) empty_fun(0)
+#define os_binary_semaphore_give_from_isr(mutex, higher_prior_task_woken) empty_fun(0)
 #define os_semaphore_give_from_isr(semaphore) empty_fun(0)
 #define os_timeout_to_ticks(timeout) empty_fun(0)
 #define os_scheduler_start() empty_fun(0)
