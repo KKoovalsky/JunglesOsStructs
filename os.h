@@ -43,6 +43,7 @@ typedef TickType_t os_tick_type_t;
 #define os_task_delete(task_handle) vTaskDelete(task_handle)
 #define os_task_get_current_task_handle() xTaskGetCurrentTaskHandle()
 #define os_task_yield taskYIELD
+#define os_task_yield_from_isr portYIELD_FROM_ISR
 #define os_task_get_state(task_handle) eTaskGetState(task_handle)
 #define os_wait_endlessly_for_notification() ulTaskNotifyTake(pdTRUE, portMAX_DELAY)
 #define os_wait_for_notification_ms(timeout_ms) ulTaskNotifyTake(pdTRUE, pdMS_TO_TICKS(timeout_ms))
@@ -144,6 +145,7 @@ typedef unsigned os_tick_type_t;
 #define os_delay_ms(delay_ms) empty_fun(0)
 #define os_task_delete_this() empty_fun(0)
 #define os_task_yield() empty_fun(0)
+#define os_task_yield_from_isr() empty_fun(0)
 #define os_task_get_state(task_handle) empty_fun(0)
 #define os_event_group_create() empty_fun(0)
 #define os_event_group_delete(event_group) empty_fun(0)
