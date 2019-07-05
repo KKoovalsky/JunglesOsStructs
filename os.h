@@ -13,6 +13,7 @@
 #include "event_groups.h"
 #include "semphr.h"
 #include "task.h"
+#include "timers.h"
 
 typedef TaskHandle_t os_task_handle_t;
 typedef BaseType_t os_base_type_t;
@@ -23,6 +24,7 @@ typedef SemaphoreHandle_t os_binary_semaphore_t;
 typedef SemaphoreHandle_t os_recursive_mutex_t;
 typedef SemaphoreHandle_t os_mutex_t;
 typedef TickType_t os_tick_type_t;
+typedef TimerHandle_t os_timer_handle_t;
 
 #define os_true pdTRUE
 #define os_false pdFALSE
@@ -79,6 +81,12 @@ typedef TickType_t os_tick_type_t;
 #define os_mutex_delete(mutex) vSemaphoreDelete(mutex)
 #define os_mutex_take(mutex, timeout) xSemaphoreTake(mutex, os_timeout_to_ticks(timeout))
 #define os_mutex_give(mutex) xSemaphoreGive(mutex)
+#define os_timer_create(name, period_ms, do_auto_reload, timer_id, clbk)                                               \
+    xTimerCreate(name, os_timeout_to_ticks(period_ms), do_auto_reload, timer_id, clbk)
+#define os_timer_get_id(tim) pvTimerGetTimerID(tim)
+#define os_timer_stop(tim, timeout_ms) xTimerStop(tim, os_timeout_to_ticks(timeout_ms))
+#define os_timer_change_period_and_reset(tim, new_period_ms, timeout_ms)                                               \
+    xTimerChangePeriod(tim, os_timeout_to_ticks(new_period_ms), os_timeout_to_ticks(timeout_ms))
 
 #define os_timeout_to_ticks(timeout_ms) (timeout_ms == portMAX_DELAY ? portMAX_DELAY : pdMS_TO_TICKS(timeout_ms))
 
@@ -126,6 +134,7 @@ typedef unsigned os_binary_semaphore_t;
 typedef unsigned os_recursive_mutex_t;
 typedef unsigned os_mutex_t;
 typedef unsigned os_tick_type_t;
+typedef unsigned os_timer_handle_t;
 
 #define os_true 1
 #define os_false 0
@@ -182,6 +191,10 @@ typedef unsigned os_tick_type_t;
 #define os_binary_semaphore_take_from_isr(mutex, higher_prior_task_woken) empty_fun(0)
 #define os_binary_semaphore_give_from_isr(mutex, higher_prior_task_woken) empty_fun(0)
 #define os_semaphore_give_from_isr(semaphore) empty_fun(0)
+#define os_timer_create(name, period_ms, do_auto_reload, timer_id, clbk) empty_fun(0)
+#define os_timer_get_id(tim) empty_fun(0)
+#define os_timer_stop(tim, timeout_ms) empty_fun(0)
+#define os_timer_change_period_and_reset(tim, new_period_ms, timeout_ms) empty_fun(0)
 #define os_timeout_to_ticks(timeout) empty_fun(0)
 #define os_scheduler_start() empty_fun(0)
 
