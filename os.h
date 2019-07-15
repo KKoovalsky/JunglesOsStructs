@@ -122,6 +122,12 @@ static inline void os_delay_ms(unsigned timeout)
     vTaskDelay(t);
 }
 
+#elif defined(__MBED__)
+
+#include "mbed.h"
+
+#define os_delay_ms(timeout) ThisThread::sleep_for(timeout)
+
 #else /* __FREERTOS__ */
 #warning "No target OS defined"
 
