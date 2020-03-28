@@ -83,7 +83,9 @@ typedef TimerHandle_t os_timer_handle_t;
 #define os_mutex_give(mutex) xSemaphoreGive(mutex)
 #define os_timer_create(name, period_ms, do_auto_reload, timer_id, clbk)                                               \
     xTimerCreate(name, os_timeout_to_ticks(period_ms), do_auto_reload, timer_id, clbk)
+#define os_timer_delete(handle, timeout_ms) xTimerDelete(handle, timeout_ms)
 #define os_timer_get_id(tim) pvTimerGetTimerID(tim)
+#define os_timer_start(tim, timeout_ms) xTimerStart(tim, os_timeout_to_ticks(timeout_ms))
 #define os_timer_stop(tim, timeout_ms) xTimerStop(tim, os_timeout_to_ticks(timeout_ms))
 #define os_timer_change_period_and_reset(tim, new_period_ms, timeout_ms)                                               \
     xTimerChangePeriod(tim, os_timeout_to_ticks(new_period_ms), os_timeout_to_ticks(timeout_ms))
@@ -198,7 +200,9 @@ typedef unsigned os_timer_handle_t;
 #define os_binary_semaphore_give_from_isr(mutex, higher_prior_task_woken) empty_fun(0)
 #define os_semaphore_give_from_isr(semaphore) empty_fun(0)
 #define os_timer_create(name, period_ms, do_auto_reload, timer_id, clbk) empty_fun(0)
+#define os_timer_delete(handle, timeout_ms) empty_fun(0)
 #define os_timer_get_id(tim) empty_fun(0)
+#define os_timer_start(tim, timeout_ms) empty_fun(0)
 #define os_timer_stop(tim, timeout_ms) empty_fun(0)
 #define os_timer_change_period_and_reset(tim, new_period_ms, timeout_ms) empty_fun(0)
 #define os_timeout_to_ticks(timeout) empty_fun(0)
